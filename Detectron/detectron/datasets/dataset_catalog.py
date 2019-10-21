@@ -78,13 +78,13 @@ _DATASETS = {
         _IM_DIR:
             _DATA_DIR + '/dataset/Train/png',
         _ANN_FN:
-            _DATA_DIR + '/dataset/Train/train_50k_annotations.json'
+            _DATA_DIR + '/content/drive/My Drive/Colab Notebooks/dataset/Train/train_50k_annotations.json'
     },
     'ass_val': {
         _IM_DIR:
             _DATA_DIR + '/dataset/Test_public/png',
         _ANN_FN:
-            _DATA_DIR + '/dataset/Test_public/val_public_annotations.json'
+            _DATA_DIR + '/content/drive/My Drive/Colab Notebooks/dataset/Test_public/val_public_annotations.json'
     },
     'coco_2014_minival': {
         _IM_DIR:
