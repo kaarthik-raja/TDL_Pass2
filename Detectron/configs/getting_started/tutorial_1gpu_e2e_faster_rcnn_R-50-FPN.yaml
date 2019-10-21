@@ -39,13 +39,13 @@ FAST_RCNN:
   ROI_XFORM_SAMPLING_RATIO: 2
 TRAIN:
   WEIGHTS: https://dl.fbaipublicfiles.com/detectron/ImageNetPretrained/MSRA/R-50.pkl
-  DATASETS: ('Train',)
+  DATASETS: ('/content/drive/My Drive/Colab Notebooks/dataset/Train',)
   SCALES: (500,)
   MAX_SIZE: 833
   BATCH_SIZE_PER_IM: 256
   RPN_PRE_NMS_TOP_N: 2000  # Per FPN level
 TEST:
-  DATASETS: ('Test_public',)
+  DATASETS: ('/content/drive/My Drive/Colab Notebooks/dataset/Test_public',)
   SCALE: 500
   MAX_SIZE: 833
   NMS: 0.5
