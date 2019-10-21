@@ -33,7 +33,7 @@
 
 
 
-INSTALL_DIR=~/work
+INSTALL_DIR=~/DL
 
 ### Install Caffe2
 sudo apt-get update
@@ -94,7 +94,5 @@ sed -i -e "/extra_compile_args/a \        extra_link_args=['-L/usr/lib/x86_64-li
 sudo make install
 
 # Next, install detectron
-DETECTRON=$INSTALL_DIR/detectron
-git clone https://github.com/facebookresearch/detectron $DETECTRON
-cd $DETECTRON
+cd Detectron
 make
