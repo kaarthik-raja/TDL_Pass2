@@ -68,11 +68,23 @@ _DATASETS = {
         _ANN_FN:
             _DATA_DIR + '/coco/annotations/instances_train2014.json'
     },
-    'coco_2014_val': {
+    'coco_2014_train': {
         _IM_DIR:
-            _DATA_DIR + '/coco/coco_val2014',
+            _DATA_DIR + '/coco/coco_train2014',
         _ANN_FN:
-            _DATA_DIR + '/coco/annotations/instances_val2014.json'
+            _DATA_DIR + '/coco/annotations/instances_train2014.json'
+    },    
+    'ass_train': {
+        _IM_DIR:
+            _DATA_DIR + '/dataset/Train/png',
+        _ANN_FN:
+            _DATA_DIR + '/dataset/Train/train_50k_annotations.json'
+    },
+    'ass_val': {
+        _IM_DIR:
+            _DATA_DIR + '/dataset/Test_public/png',
+        _ANN_FN:
+            _DATA_DIR + '/dataset/Test_public/val_public_annotations.json'
     },
     'coco_2014_minival': {
         _IM_DIR:
