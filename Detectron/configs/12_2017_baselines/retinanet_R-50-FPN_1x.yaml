@@ -8,8 +8,8 @@ SOLVER:
   LR_POLICY: steps_with_decay
   BASE_LR: 0.01
   GAMMA: 0.1
-  MAX_ITER: 24000
-  STEPS: [0, 8000, 16000]
+  MAX_ITER: 30000
+  STEPS: [0, 10000, 20000]
 FPN:
   FPN_ON: True
   MULTILEVEL_RPN: True
@@ -27,13 +27,13 @@ RETINANET:
   LOSS_ALPHA: 0.25
 TRAIN:
   WEIGHTS: https://dl.fbaipublicfiles.com/detectron/ImageNetPretrained/MSRA/R-50.pkl
-  DATASETS: ('ass_train',)
+  DATASETS: ('coco_ass_train',)
   SCALES: (800,)
   SNAPSHOT_ITERS: 2000
   MAX_SIZE: 1333
   RPN_STRADDLE_THRESH: -1  # default 0
 TEST:
-  DATASETS: ('ass_val',)
+  DATASETS: ('coco_ass_val',)
   SCALE: 800
   MAX_SIZE: 1333
   NMS: 0.5
