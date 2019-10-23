@@ -560,6 +560,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
                 print_imagenet_detections(fp, i + t - nthreads + 1, dets, nboxes, classes, w, h);
             }
             else {
+            	printf("%s\n", "@@@@@@@@@@@@");
                 print_detector_detections(fps, id, dets, nboxes, classes, w, h);
             }
             free_detections(dets, nboxes);
