@@ -470,13 +470,9 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     printf("_bf coco________________________________%s_\n",type);
 
     if (0 == strcmp(type, "coco")) {
-	    printf("coco___b_______________________________\n");
         if (!outfile) outfile = "coco_results";
-	    printf("coco___b1_______________________________\n");
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
-	    printf("coco___b2_______________________________\n");
         fp = fopen(buff, "w");
-	    printf("coco___b3_______________________________\n");
         fprintf(fp, "[\n");
 	    printf("coco___b4_______________________________\n");
         coco = 1;

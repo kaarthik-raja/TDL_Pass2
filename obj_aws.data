@@ -1,5 +1,6 @@
 classes= 8
 train  = ~/DL/Train/names.txt
-valid  = ~/DL/Test_public/names.txt
+valid  = ~/DL/Test_private/names.txt
 names = ~/DL/code/obj.names
 backup = ~/DL/output
+eval=coco
