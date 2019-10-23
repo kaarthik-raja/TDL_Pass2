@@ -467,15 +467,16 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     FILE **fps = 0;
     int coco = 0;
     int imagenet = 0;
-    printf("__________________________________\n");
+    printf("_bf coco________________________________%s_\n",type);
 
     if (0 == strcmp(type, "coco")) {
+	    printf("coco___b_______________________________\n");
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
         fprintf(fp, "[\n");
         coco = 1;
-	    printf("coco__________________________________\n");
+	    printf("coco____f______________________________\n");
 
     }
     else if (0 == strcmp(type, "imagenet")) {
@@ -509,6 +510,8 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     image* buf = (image*)calloc(nthreads, sizeof(image));
     image* buf_resized = (image*)calloc(nthreads, sizeof(image));
     pthread_t* thr = (pthread_t*)calloc(nthreads, sizeof(pthread_t));
+
+    printf("for__________________________________()\n");
 
     load_args args = { 0 };
     args.w = net.w;
