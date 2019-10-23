@@ -229,6 +229,8 @@ def _log_detection_eval_metrics(json_dataset, coco_eval):
 
     IoU_lo_thresh = 0.5
     IoU_hi_thresh = 0.95
+    ind_90 = _get_thr_ind(coco_eval, 0.9)
+
     ind_lo = _get_thr_ind(coco_eval, IoU_lo_thresh)
     ind_hi = _get_thr_ind(coco_eval, IoU_hi_thresh)
     # precision has dims (iou, recall, cls, area range, max dets)
@@ -248,6 +250,10 @@ def _log_detection_eval_metrics(json_dataset, coco_eval):
             ind_lo:(ind_hi + 1), :, cls_ind - 1, 0, 2]
         ap = np.mean(precision[precision > -1])
         logger.info('{:.1f}'.format(100 * ap))
+    precision2 = coco_eval.eval['precision'][ind_90, :, :, 0, 2]
+    ap_default2 = np.mean(precision2[precision2 > -1])    
+    logger.info('~~~~ Map 90 ~~~~{:.2f}'.format(ap_default2))
+
     logger.info('~~~~ Summary metrics ~~~~')
     coco_eval.summarize()
 
