@@ -1487,7 +1487,11 @@ void run_detector(int argc, char **argv)
     else if (0 == strcmp(argv[2], "train")) train_detector(datacfg, cfg, weights, gpus, ngpus, clear, dont_show, calc_map, mjpeg_port, show_imgs);
     else if (0 == strcmp(argv[2], "valid")) validate_detector(datacfg, cfg, weights, outfile);
     else if (0 == strcmp(argv[2], "recall")) validate_detector_recall(datacfg, cfg, weights);
-    else if (0 == strcmp(argv[2], "map")) validate_detector_map(datacfg, cfg, weights, thresh, iou_thresh, map_points, letter_box, NULL);
+    else if (0 == strcmp(argv[2], "map")) {
+            validate_detector_map(datacfg, cfg, weights, thresh, 0.9, map_points, letter_box, NULL);
+            validate_detector_map(datacfg, cfg, weights, thresh, 0.75, map_points, letter_box, NULL);
+            validate_detector_map(datacfg, cfg, weights, thresh, 0.5, map_points, letter_box, NULL);
+            }
     else if (0 == strcmp(argv[2], "calc_anchors")) calc_anchors(datacfg, num_of_clusters, width, height, show);
     else if (0 == strcmp(argv[2], "demo")) {
         list *options = read_data_cfg(datacfg);
