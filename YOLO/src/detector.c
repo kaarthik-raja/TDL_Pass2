@@ -546,11 +546,15 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
             char *path = paths[i + t - nthreads];
             char *id = basecfg(path);
             float *X = val_resized[t].data;
+            printf("%s\n", "@1@@@@@@@@@@@");
+            
             network_predict(net, X);
             int w = val[t].w;
             int h = val[t].h;
             int nboxes = 0;
             int letterbox = (args.type == LETTERBOX_DATA);
+            printf("%s\n", "@2@@@@@@@@@@@");
+
             detection *dets = get_network_boxes(&net, w, h, thresh, .5, map, 0, &nboxes, letterbox);
             if (nms) do_nms_sort(dets, nboxes, classes, nms);
             if (coco) {
@@ -560,7 +564,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
                 print_imagenet_detections(fp, i + t - nthreads + 1, dets, nboxes, classes, w, h);
             }
             else {
-            	printf("%s\n", "@@@@@@@@@@@@");
+            	printf("%s\n", "@3@@@@@@@@@@@");
                 print_detector_detections(fps, id, dets, nboxes, classes, w, h);
             }
             free_detections(dets, nboxes);
