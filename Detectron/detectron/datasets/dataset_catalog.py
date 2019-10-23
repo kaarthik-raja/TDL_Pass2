@@ -90,7 +90,7 @@ _DATASETS = {
         _IM_DIR:
             _DATA_DIR + '/../../../../../../../../Test_private/png',
         _ANN_FN:
-            _DATA_DIR + '/../../../../../../../../Test_public/val_public_annotations.json'
+            _DATA_DIR + '/../../../../../../../../Test_public/val_private_annotations.json'
     },
     'coco_2014_minival': {
         _IM_DIR:
