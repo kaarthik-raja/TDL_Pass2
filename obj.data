@@ -1,5 +1,5 @@
 classes= 8
-train  = ~/DL/Train/names.txt
-valid  = ~/DL/Test_public/names.txt
-names = ~/DL/obj.names
-backup = ~/DL/output
+train  = /content/Train/names.txt
+valid  = /content/Test_public/names.txt
+names = /content/code/obj.names
+backup = /content/output
