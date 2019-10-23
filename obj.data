@@ -2,4 +2,4 @@ classes= 8
 train  = /content/Train/names.txt
 valid  = /content/Test_public/names.txt
 names = /content/code/obj.names
-backup = "/content/drive/My Drive/Colab Notebooks/output"
+backup = /content/drive/My Drive/Colab Notebooks/output 
