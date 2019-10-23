@@ -3,3 +3,4 @@ train  = /content/Train/names.txt
 valid  = /content/Test_private/names.txt
 names = /content/code/obj.names
 backup = /content/output
+eval = coco
