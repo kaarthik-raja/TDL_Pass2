@@ -1495,7 +1495,7 @@ void run_detector(int argc, char **argv)
     if (0 == strcmp(argv[2], "test")) test_detector(datacfg, cfg, weights, filename, thresh, hier_thresh, dont_show, ext_output, save_labels, outfile, letter_box);
     else if (0 == strcmp(argv[2], "train")) train_detector(datacfg, cfg, weights, gpus, ngpus, clear, dont_show, calc_map, mjpeg_port, show_imgs);
     else if (0 == strcmp(argv[2], "valid")) {
-    	printf("%s\n", "came to function swithcer");
+    	printf("%s\n", "came to function swithcer_____________________________________");
     	validate_detector(datacfg, cfg, weights, outfile);
     }
     else if (0 == strcmp(argv[2], "recall")) validate_detector_recall(datacfg, cfg, weights);
