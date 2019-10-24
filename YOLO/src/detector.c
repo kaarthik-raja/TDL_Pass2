@@ -472,7 +472,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
-        printf(fp, "##@@@[\n");
+        printf("##@@@[\n");
 
         coco = 1;
 
@@ -575,7 +575,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 #else
         fseek(fp, -2, SEEK_CUR);
 #endif
-        fprintf(fp, "##@@@\n]\n");
+        printf("##@@@\n]\n");
         fclose(fp);
     }
     fprintf(stderr, "Total Detection Time: %f Seconds\n", (double)time(0) - start);
