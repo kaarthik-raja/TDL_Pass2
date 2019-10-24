@@ -381,7 +381,10 @@ static void print_cocos(FILE *fp, char *image_path, detection *dets, int num_box
         float bh = ymax - ymin;
 
         for (j = 0; j < classes; ++j) {
-            if (dets[i].prob[j]) fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
+            if (dets[i].prob[j]){ 
+            	// fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
+            	printf("##@@@{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
+        	}
         }
     }
 }
@@ -469,7 +472,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
-        printf(fp, "@@@[\n");
+        printf(fp, "##@@@[\n");
 
         coco = 1;
 
@@ -524,7 +527,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 
     for (i = nthreads; i < m + nthreads; i += nthreads) {
         fprintf(stderr, "%d\n", i);
-        printf("___)))))))\n\n")
         for (t = 0; t < nthreads && i + t - nthreads < m; ++t) {
             pthread_join(thr[t], 0);
             val[t] = buf[t];
@@ -573,7 +575,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 #else
         fseek(fp, -2, SEEK_CUR);
 #endif
-        fprintf(fp, "\n]\n");
+        fprintf(fp, "##@@@\n]\n");
         fclose(fp);
     }
     fprintf(stderr, "Total Detection Time: %f Seconds\n", (double)time(0) - start);
