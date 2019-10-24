@@ -475,7 +475,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         if(fp == NULL)
         	printf("%s\n", "##### File pointer is NULL\n\n");
         printf("#%s#\n",buff );
-        printf("%s\n", );
         printf("##@@@[\n");
 
         coco = 1;
