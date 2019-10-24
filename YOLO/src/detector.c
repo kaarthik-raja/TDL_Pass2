@@ -383,7 +383,7 @@ static void print_cocos(FILE *fp, char *image_path, detection *dets, int num_box
         for (j = 0; j < classes; ++j) {
             if (dets[i].prob[j]){ 
             	// fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
-            	printf("##@@@{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
+            	// printf("##@@@{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
         	}
         }
     }
@@ -472,6 +472,10 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
+        if(fp == NULL)
+        	printf("%s\n", "##### File pointer is NULL\n\n");
+        printf("#%s#\n",buff );
+        printf("%s\n", );
         printf("##@@@[\n");
 
         coco = 1;
