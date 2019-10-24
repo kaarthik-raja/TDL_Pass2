@@ -524,7 +524,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 
     for (i = nthreads; i < m + nthreads; i += nthreads) {
         fprintf(stderr, "%d\n", i);
-        printf("___")
+        printf("___)))))))\n\n")
         for (t = 0; t < nthreads && i + t - nthreads < m; ++t) {
             pthread_join(thr[t], 0);
             val[t] = buf[t];
