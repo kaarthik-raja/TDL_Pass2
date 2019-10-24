@@ -388,7 +388,7 @@ int fill_truth_detection(const char *path, int num_boxes, float *truth, int clas
             continue;
         }
         if (x == 999999 || y == 999999) {
-            printf("\n Wrong annotation: x = 0, y = 0, < 0 or > 1 \n");
+            // printf("\n Wrong annotation: x = 0, y = 0, < 0 or > 1 \n");
             sprintf(buff, "echo %s \"Wrong annotation: x = 0 or y = 0\" >> bad_label.list", labelpath);
             system(buff);
             ++sub;
