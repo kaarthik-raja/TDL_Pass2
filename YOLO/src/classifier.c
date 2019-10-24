@@ -167,7 +167,7 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int *gpus,
         draw_train_loss(img, img_size, avg_loss, max_img_loss, i, net.max_batches, topk, draw_precision, "top5", dont_show, mjpeg_port);
 #endif  // OPENCV
 
-        if (i >= (iter_save + 1000)) {
+        if (i >= (iter_save + 200)) {
             iter_save = i;
 #ifdef GPU
             if (ngpus != 1) sync_nets(nets, ngpus, 0);
