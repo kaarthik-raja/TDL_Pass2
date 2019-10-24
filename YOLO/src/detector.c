@@ -443,13 +443,10 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 
     network net = parse_network_cfg_custom(cfgfile, 1, 1);    // set batch=1
     if (weightfile) {
-	    printf("1ld__________________________________\n");
 
         load_weights(&net, weightfile);
-	    printf("1loaded__________________________________\n");
 
     }
-    printf("1__________________________________\n");
 
     //set_batch_network(&net, 1);
     fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
@@ -467,13 +464,13 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     FILE **fps = 0;
     int coco = 0;
     int imagenet = 0;
-    printf("_bf coco________________________________%s_\n",type);
 
     if (0 == strcmp(type, "coco")) {
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
-        fprintf(fp, "[\n");
+        // fprintf(fp, "[\n");
+        
 	    printf("coco___b4_______________________________\n");
         coco = 1;
 	    printf("coco____f______________________________\n");
@@ -1508,7 +1505,6 @@ void run_detector(int argc, char **argv)
     if (0 == strcmp(argv[2], "test")) test_detector(datacfg, cfg, weights, filename, thresh, hier_thresh, dont_show, ext_output, save_labels, outfile, letter_box);
     else if (0 == strcmp(argv[2], "train")) train_detector(datacfg, cfg, weights, gpus, ngpus, clear, dont_show, calc_map, mjpeg_port, show_imgs);
     else if (0 == strcmp(argv[2], "valid")) {
-    	printf("%s\n", "came to function swithcer_____________________________________\n");
     	validate_detector(datacfg, cfg, weights, outfile);
     }
     else if (0 == strcmp(argv[2], "recall")) validate_detector_recall(datacfg, cfg, weights);
