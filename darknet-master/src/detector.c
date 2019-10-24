@@ -381,10 +381,7 @@ static void print_cocos(FILE *fp, char *image_path, detection *dets, int num_box
         float bh = ymax - ymin;
 
         for (j = 0; j < classes; ++j) {
-            if (dets[i].prob[j]){ 
-            	// fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
-            	// printf("##@@@{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
-        	}
+            if (dets[i].prob[j]) fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j]);
         }
     }
 }
@@ -446,11 +443,8 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 
     network net = parse_network_cfg_custom(cfgfile, 1, 1);    // set batch=1
     if (weightfile) {
-
         load_weights(&net, weightfile);
-
     }
-
     //set_batch_network(&net, 1);
     fprintf(stderr, "Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
     srand(time(0));
@@ -467,18 +461,12 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     FILE **fps = 0;
     int coco = 0;
     int imagenet = 0;
-
     if (0 == strcmp(type, "coco")) {
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
-        if(fp == NULL)
-        	printf("%s\n", "##### File pointer is NULL\n\n");
-        printf("#%s#\n",buff );
-        printf("##@@@[\n");
-
+        fprintf(fp, "[\n");
         coco = 1;
-
     }
     else if (0 == strcmp(type, "imagenet")) {
         if (!outfile) outfile = "imagenet-detection";
@@ -512,7 +500,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     image* buf_resized = (image*)calloc(nthreads, sizeof(image));
     pthread_t* thr = (pthread_t*)calloc(nthreads, sizeof(pthread_t));
 
-
     load_args args = { 0 };
     args.w = net.w;
     args.h = net.h;
@@ -527,7 +514,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         thr[t] = load_data_in_thread(args);
     }
     time_t start = time(0);
-
     for (i = nthreads; i < m + nthreads; i += nthreads) {
         fprintf(stderr, "%d\n", i);
         for (t = 0; t < nthreads && i + t - nthreads < m; ++t) {
@@ -545,13 +531,11 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
             char *path = paths[i + t - nthreads];
             char *id = basecfg(path);
             float *X = val_resized[t].data;
-            
             network_predict(net, X);
             int w = val[t].w;
             int h = val[t].h;
             int nboxes = 0;
             int letterbox = (args.type == LETTERBOX_DATA);
-
             detection *dets = get_network_boxes(&net, w, h, thresh, .5, map, 0, &nboxes, letterbox);
             if (nms) do_nms_sort(dets, nboxes, classes, nms);
             if (coco) {
@@ -578,7 +562,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 #else
         fseek(fp, -2, SEEK_CUR);
 #endif
-        printf("##@@@\n]\n");
+        fprintf(fp, "\n]\n");
         fclose(fp);
     }
     fprintf(stderr, "Total Detection Time: %f Seconds\n", (double)time(0) - start);
@@ -1439,7 +1423,6 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
 
 void run_detector(int argc, char **argv)
 {
-	printf("%s\n", "KILKILssssssSSSSSS");
     int dont_show = find_arg(argc, argv, "-dont_show");
     int show = find_arg(argc, argv, "-show");
     int letter_box = find_arg(argc, argv, "-letter_box");
@@ -1503,9 +1486,7 @@ void run_detector(int argc, char **argv)
     char *filename = (argc > 6) ? argv[6] : 0;
     if (0 == strcmp(argv[2], "test")) test_detector(datacfg, cfg, weights, filename, thresh, hier_thresh, dont_show, ext_output, save_labels, outfile, letter_box);
     else if (0 == strcmp(argv[2], "train")) train_detector(datacfg, cfg, weights, gpus, ngpus, clear, dont_show, calc_map, mjpeg_port, show_imgs);
-    else if (0 == strcmp(argv[2], "valid")) {
-    	validate_detector(datacfg, cfg, weights, outfile);
-    }
+    else if (0 == strcmp(argv[2], "valid")) validate_detector(datacfg, cfg, weights, outfile);
     else if (0 == strcmp(argv[2], "recall")) validate_detector_recall(datacfg, cfg, weights);
     else if (0 == strcmp(argv[2], "map")) validate_detector_map(datacfg, cfg, weights, thresh, iou_thresh, map_points, letter_box, NULL);
     else if (0 == strcmp(argv[2], "calc_anchors")) calc_anchors(datacfg, num_of_clusters, width, height, show);
