@@ -469,11 +469,9 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         if (!outfile) outfile = "coco_results";
         snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
         fp = fopen(buff, "w");
-        // fprintf(fp, "[\n");
-        
-	    printf("coco___b4_______________________________\n");
+        printf(fp, "@@@[\n");
+
         coco = 1;
-	    printf("coco____f______________________________\n");
 
     }
     else if (0 == strcmp(type, "imagenet")) {
@@ -508,7 +506,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
     image* buf_resized = (image*)calloc(nthreads, sizeof(image));
     pthread_t* thr = (pthread_t*)calloc(nthreads, sizeof(pthread_t));
 
-    printf("for__________________________________()\n");
 
     load_args args = { 0 };
     args.w = net.w;
@@ -524,10 +521,10 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
         thr[t] = load_data_in_thread(args);
     }
     time_t start = time(0);
-    printf("for__________________________________%d - %d\n" , m , nthreads);
 
     for (i = nthreads; i < m + nthreads; i += nthreads) {
         fprintf(stderr, "%d\n", i);
+        printf("___")
         for (t = 0; t < nthreads && i + t - nthreads < m; ++t) {
             pthread_join(thr[t], 0);
             val[t] = buf[t];
@@ -543,14 +540,12 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
             char *path = paths[i + t - nthreads];
             char *id = basecfg(path);
             float *X = val_resized[t].data;
-            printf("%s\n", "@1@@@@@@@@@@@");
             
             network_predict(net, X);
             int w = val[t].w;
             int h = val[t].h;
             int nboxes = 0;
             int letterbox = (args.type == LETTERBOX_DATA);
-            printf("%s\n", "@2@@@@@@@@@@@");
 
             detection *dets = get_network_boxes(&net, w, h, thresh, .5, map, 0, &nboxes, letterbox);
             if (nms) do_nms_sort(dets, nboxes, classes, nms);
@@ -561,7 +556,6 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
                 print_imagenet_detections(fp, i + t - nthreads + 1, dets, nboxes, classes, w, h);
             }
             else {
-            	printf("%s\n", "@3@@@@@@@@@@@");
                 print_detector_detections(fps, id, dets, nboxes, classes, w, h);
             }
             free_detections(dets, nboxes);
